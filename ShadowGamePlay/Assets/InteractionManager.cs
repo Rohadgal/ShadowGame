@@ -6,6 +6,7 @@ public class InteractionManager : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
+            Debug.Log("E PRESSED");
             TryInteract();
         }
     }
