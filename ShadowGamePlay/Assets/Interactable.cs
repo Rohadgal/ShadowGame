@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour {
 
+    [SerializeField]
+    float distanceInteractable = 4f;
     //private Vector3 originalPosition;
     //private Quaternion originalRotation;
 
@@ -10,7 +12,6 @@ public class Interactable : MonoBehaviour {
         //originalPosition = transform.position;
         //originalRotation = transform.rotation;
     }
-
 
     public void Interact(RaycastHit hit) {
         // Implement interaction logic here
@@ -22,10 +23,10 @@ public class Interactable : MonoBehaviour {
             // If picked up, move the object to a position relative to the player
             Transform playerTransform = Camera.main.transform;
             transform.SetParent(playerTransform);
-            transform.localPosition = Vector3.forward * 4f; // Adjust this position as needed
+            transform.localPosition = Vector3.forward * distanceInteractable; // Adjust this position as needed
         } else {
-            transform.SetParent(null);
-            transform.position = hit.point;
+            transform.SetParent(null, true);
+            //transform.position = hit.point;
             //transform.position = originalPosition;
             //transform.rotation = originalRotation;
         }

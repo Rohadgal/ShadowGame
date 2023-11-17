@@ -13,15 +13,9 @@ public class InteractionManager : MonoBehaviour {
     void TryInteract() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer)) {
             Interactable interactable = hit.collider.GetComponent<Interactable>();
-
             if (interactable != null) {
-                // Call the interact method on the interactable object
-
-                Debug.Log("name d: " + interactable.name);
-                Debug.Log("name j: " + hit);
                 interactable.Interact(hit);
             }
         }
