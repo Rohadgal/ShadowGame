@@ -1,13 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the 2D movement and interactions of the character.
+/// </summary>
 public class CharacterController2D : MonoBehaviour {
 
     #region Public
 
     /// <summary>
-    /// Instancia singleton de PlayerController
+    /// Layer mask to determine what is considered as ground.
     /// </summary>
-
     public LayerMask whatIsGround;
 
     #endregion Public
@@ -31,9 +33,14 @@ public class CharacterController2D : MonoBehaviour {
         m_isGrounded = false;
     }
 
-    // Start is called before the first frame update
     private void Start() {
         m_rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update() {
+        if (Input.GetButtonDown("Jump")) {
+            jump();
+        }
     }
 
     private void FixedUpdate() {
@@ -44,35 +51,48 @@ public class CharacterController2D : MonoBehaviour {
         verticalMovement();
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(footPosition.position, footRadius);
+    }
+
+    /// <summary>
+    /// Handles horizontal movement, flipping the character, and additional actions based on input.
+    /// </summary>
     private void horizontalMovement() {
         float xMove = Input.GetAxisRaw("Horizontal");
         m_rb.velocity = new Vector2(xMove * xSpeed, m_rb.velocity.y);
+
         if ((xMove < 0 && m_isFacingRight) || (xMove > 0 && !m_isFacingRight)) {
             flip();
         }
+
         if (m_isGrounded) {
             if (xMove != 0) {
+                // Actions when the player is moving horizontally.
             } else if (xMove == 0) {
+                // Actions when the player is not moving horizontally.
             }
         }
     }
 
+    /// <summary>
+    /// Handles vertical movement and additional actions based on the vertical velocity.
+    /// </summary>
     private void verticalMovement() {
         if (m_isGrounded) {
             return;
         }
         if (m_rb.velocity.y >= 0.1f) {
+            // Actions when the character is ascending.
         } else if (m_rb.velocity.y < -0.1f) {
+            // Actions when the character is descending.
         }
     }
 
-    // Update is called once per frame
-    private void Update() {
-        if (Input.GetButtonDown("Jump")) {
-            jump();
-        }
-    }
-
+    /// <summary>
+    /// Initiates a jump if the character is grounded.
+    /// </summary>
     private void jump() {
         if (!m_isGrounded) {
             return;
@@ -80,13 +100,11 @@ public class CharacterController2D : MonoBehaviour {
         m_rb.velocity = new Vector2(m_rb.velocity.x, jumpForce);
     }
 
+    /// <summary>
+    /// Flips the character's direction.
+    /// </summary>
     private void flip() {
         transform.Rotate(0, 180, 0);
         m_isFacingRight = !m_isFacingRight;
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(footPosition.position, footRadius);
     }
 }
