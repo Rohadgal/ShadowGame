@@ -9,7 +9,11 @@ public class InteractionManager : MonoBehaviour {
     RaycastHit hit;
 
 
-    void Update() {
+    private void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
             Debug.Log("E PRESSED");
             if(!isObjectGrabbed) {
@@ -22,7 +26,7 @@ public class InteractionManager : MonoBehaviour {
         }
     }
 
-    void TryInteract() {
+    private void TryInteract() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer)) {
             interactable = hit.collider.GetComponent<Interactable>();
