@@ -39,4 +39,11 @@ public class Interactable : MonoBehaviour {
         bool isPickedUp = transform.parent != null;
         return isPickedUp;
     }
+
+    public void setOutline(bool isSelected) {
+        if(!isSelected) {
+            return;
+        }
+        //mat.color.a = 1f;
+    }
 }
