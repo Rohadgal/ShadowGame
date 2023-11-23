@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InteractionManager : MonoBehaviour {
     public float interactionRange = 3f;
@@ -9,7 +8,6 @@ public class InteractionManager : MonoBehaviour {
     Interactable interactable;
     RaycastHit hit;
 
-
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -18,16 +16,22 @@ public class InteractionManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             grabReleaseObject();
         }
+        setOutline();
     }
 
     void grabReleaseObject() {
+       // setOutline();
         if (!isObjectGrabbed) {
+            isObjectGrabbed = true;
             TryInteract();
+            //setOutline();
             return;
         }
         isObjectGrabbed = false;
-        if (interactable != null) { }
-        interactable.Interact(hit);
+        if (interactable != null) {
+            // soltar objeto
+            interactable.Interact(hit);
+        }
     }
 
     void TryInteract() {
@@ -35,9 +39,23 @@ public class InteractionManager : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer)) {
             interactable = hit.collider.GetComponent<Interactable>();
             if (interactable != null) {
-                interactable.Interact(hit);
-                isObjectGrabbed = true;
+                interactable.Interact(hit); 
             }
         }
+    }
+
+    void setOutline() {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer)) {
+            interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable != null) {
+                interactable.outlineMesh.SetActive(true);
+            }
+            return;
+        }
+        if(interactable != null) {
+            interactable.outlineMesh.SetActive(false);
+        }
+        
     }
 }

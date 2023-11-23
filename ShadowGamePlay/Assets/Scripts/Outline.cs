@@ -32,7 +32,7 @@ public class Outline : MonoBehaviour
 
     public void setIsGrabbed(bool t_isGrabbed) {
         isGrabbed = t_isGrabbed;
-
+    
         ApplyOutline(t_isGrabbed);
     }
 

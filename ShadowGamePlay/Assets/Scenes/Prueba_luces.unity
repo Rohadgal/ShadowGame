@@ -749,7 +749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122019b3abf84fd42bf023530c0340ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceInteractable: 2.9
+  distanceInteractable: 4
+  outlineMesh: {fileID: 1551086722}
 --- !u!1 &1551086722
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +763,6 @@ GameObject:
   - component: {fileID: 1551086726}
   - component: {fileID: 1551086725}
   - component: {fileID: 1551086724}
-  - component: {fileID: 1551086727}
   m_Layer: 8
   m_Name: Outline
   m_TagString: Untagged
@@ -826,7 +826,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 557556cee9a4339438241e550975d1df, type: 2}
+  - {fileID: 2100000, guid: 17181375a56a2354da04a84de72deff7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -856,20 +856,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551086722}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1551086727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551086722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d78aa3fcf50a04691d70cdae274bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: 17181375a56a2354da04a84de72deff7, type: 2}
-  colorMaterial: {fileID: 2100000, guid: 557556cee9a4339438241e550975d1df, type: 2}
 --- !u!1 &1652534398
 GameObject:
   m_ObjectHideFlags: 0
