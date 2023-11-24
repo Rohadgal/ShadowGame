@@ -69,9 +69,9 @@ public class CharacterController2D : MonoBehaviour {
 
         if (m_isGrounded) {
             if (xMove != 0) {
-                // Actions when the player is moving horizontally.
+                PlayerManager.instance.changePlayerSate(PlayerState.Running);
             } else if (xMove == 0) {
-                // Actions when the player is not moving horizontally.
+                PlayerManager.instance.changePlayerSate(PlayerState.Idle);
             }
         }
     }
@@ -84,9 +84,9 @@ public class CharacterController2D : MonoBehaviour {
             return;
         }
         if (m_rb.velocity.y >= 0.1f) {
-            // Actions when the character is ascending.
+            PlayerManager.instance.changePlayerSate(PlayerState.Jump);
         } else if (m_rb.velocity.y < -0.1f) {
-            // Actions when the character is descending.
+            PlayerManager.instance.changePlayerSate(PlayerState.JumpFall);
         }
     }
 
